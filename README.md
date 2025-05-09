@@ -43,7 +43,7 @@ Target The KNN target was imputed with variable n_components values, tailored to
 Time Only Fold 3 was useful, as scores tended to improve across folds. Examining all three time series folds allowed us to be ready to detect time-dependent changes in data quality. Patterms indicate that the datasets had better data in later years, which aligns with prior expections. There exists the potential to enhance model performance using the sample_weight parameter inside of the models, given that more recent data is more complete.
 
 ## Conclusion
-![Feature Importances Matrix](feature_importances_heatmap_desc.jpg)
+![Feature Importances Matrix](top_ten_importances_heatmap_desc.jpg)
 
 We began this analysis with the question, "What types of household configurations best predict happy lives?"
 
