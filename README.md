@@ -1,19 +1,7 @@
 # CoResidence
 ## Project Description:
 
-
-This analysis examines the relationship of household composition to markers of prosperity, by country and over time. Household formation is generally recognized as an important driver of economic growth, prosperity, and human flourisihing. But what does it mean to be a household? Households compositions vary, ranging from nuclear families, to roommates arrangements, to extended kinship situations. In essence, this project aims to answer the question, "What types of household configurations best predict happy lives?"
-
-A number of proxies for "happy" are considered. Initially, HDI (Human Development Index) was chosen as a proxy, but this caused indirect data leakage with features, which constitute the index. To mitigate this, Gini Index was imported from outside the dataset, as an alternative target. This preserved key features while stopping the leakage, but introduced new complexity.
-
-The primary dataset in this analysis, CoResidence, was compiled by researchers at the University of Barcelona. It is high dimensional, and once merged with Gini values, sparse. Sparsity and high dimensionality present challenges to handling missing values without significant information loss. 
-
-Reconstructing incomplete data can increase bias, noise, and multicollinearity. To address this, I deploy three different strategies for data imputation: 
-1) Interpolation (Linear Spline)
-2) Iterative Imputation (Bayesian Ridge)
-3) Matrix Decomposition (Truncated SVD)
-
-The goal of imputation is not only information preservation, but preparing the dataset for a phase II forecasting analysis. All imputation methods are tested against all models, and feature importances are compared among best performing model-dataset pairs. Imputed values are audited via flagging, training on ground truth values only, and testing on imputed values only. Target imputation is conducted independently of features. 
+This analysis examines how household composition relates to national prosperity across countries and time, and prepares a panel for forecasting future Gini values. Methods emphasize leakage-aware design (train-only scaling), time-series cross-validation, clustered confidence intervals, and a comparative study of imputation strategies (interpolation, Iterative Imputer, Truncated SVD).
 
 
 Tables included:
