@@ -1,6 +1,8 @@
 # CoResidence
 ## Project Description:
 
+This project is primarily a learning experience for me, and represents my first attempt to "walk down every path" in a labyrinth of real world data. I purposely chose a complex dataset, and 
+
 This analysis examines how household composition relates to national prosperity across countries and time, and prepares a panel for forecasting future Gini values. Methods emphasize leakage-aware design (train-only scaling), time-series cross-validation, clustered confidence intervals, and a comparative study of imputation strategies (interpolation, Iterative Imputer, Truncated SVD).
 
 
