@@ -2,7 +2,7 @@
 ## Learning Goals:
 
 
-This project uses the “CoResidence” dataset, a study of household composition out of University of Barcelona, combined with World Bank and United Nations demographic data, to study how household structure relates to economic well-being across countries and time. The broader aim is to explore how to responsibly reconstruct missing values, model latent structure, and evaluate predictive signal in a high-dimensional multi-panel dataset with substantial missingness.
+This project uses the “CoResidence” dataset, a recent study of household composition, combined with World Bank and United Nations demographic data, to study how household structure relates to economic well-being across countries and time. The methodological aim in this projet is to explore how to responsibly reconstruct missing values, model latent structure, and evaluate predictive signal in a high-dimensional multi-panel dataset with substantial missingness.
 
 CoResidence is my capstone project as an autodidact in data science. My goal was to take a real-world, high-dimensional dataset—preferably complex panel data spanning decades—and treat it as if I had been assigned a forecasting task under realistic constraints.
 
@@ -12,7 +12,7 @@ In other words:
 2) Assume the dataset must be used as-is.
 3) Assume missing values must be filled, not dropped.
 
-In data science courses that I took, .dropna() was almost always the first preprocessing step. And I almost always quietly wondered: What if that weren’t an option? What if we actually had to use the data we were given?
+In the formal data science courses that I took, .dropna() was almost always the first preprocessing step. And I almost always quietly wondered: What if that weren’t an option? What if we actually had to use the data we were given?
 
 This question is central in many real applications:
 
@@ -32,32 +32,54 @@ This analysis examines how household composition relates to national prosperity 
 4) Use of TruncatedSVD both for imputation and for dimensionality reduction
 5) Back-projection and back-allocation from latent components to native feature space
 
-Of course I included a .dropna() baseline model for comparison. It produced reasonable scores, but the resulting design matrix contained far fewer observations and exhibited strong multicollinearity typical of macro-demographic indicators. Even after properly addressing the add-to-one household composition groups, the remaining features formed an effectively low-rank and ill-conditioned matrix.
+Of course, I did include a .dropna() baseline model for comparison. It produced reasonable scores, but the resulting design matrix contained far fewer observations and exhibited strong multicollinearity typical of macro-demographic indicators. Even after properly addressing compositional data, remaining features formed an effectively low-rank and ill-conditioned matrix.
 
 **Model Comparison**
 
 Multiple model classes were evaluated, including both linear and nonlinear approaches.
 
-Feature importances for linear models were interpreted through back-projected coefficients. All models, regardless of linearity, were compared using allocated load on permutation importances (row-normalized squares of the decomposition), ensuring consistency across different model types.
+Feature importances for linear models were interpreted through back-projected coefficients. All models, regardless of linearity, were compared using allocated load on permutation importances (row-normalized squares), ensuring consistency across different model types.
 
 
 ## Model Comparison
 ![Model Comparison](final_score_matrix.jpg)
 
-As you can see, the baseline model (.dropna()) produced some of the best results, in terms of explanatory power (R2). This is likely due to the fact that countries with poor data quality were largely dropped, by definition. Higher R2 values hid an underlying problem: Unstable matrix. 
+As you can see, the baseline model (.dropna()) produced some of the best results, in terms of explanatory power (R2). This is likely due to the fact that countries with poor data quality were mostly dropped, by definition. Higher R2 values of the baseline model hid an underlying problem: Unstable matrix. Unstable matrices produce unreliable model results. Tiny changes to any value in an unstable matrix can cause your model to whip around wildly. Thus, dimensionality reduction was needed.
 
 
 
 ## Conclusion
 
-Feature importances conducted in a number of different ways. Linear models used back-projected coefficients. Permutation importances using allocated load (row-normalized squares) was used to keep all models comparable.
+My analysis looks at feature importances in a number of different ways. Here, I only report permutation importances, and not linear coefficients or Random Forest splitting criteria. Permutation importance measures predictive dependence. 
+
+
+
+Hence why I report importances in PI:
+
+For the linear models, the top ten features can be summarized as four main insights. These are the features that really matter:
+1) GDP
+2) The number of children in small and medium-sized households
+3) The number of non-relatives in small and medium sized households
+4) The proportion of large (9-person) female-headed households
+
+The narrative that links these four features together is murky, but plausible. In stable countries, medium households predominate. However, if those medium households are not families, but rather adult roommate situations, that does not bode well for wealth equality.
+
+The non-linear models did overlap with the linear models on a number of features, but identified important signals of their own:
 
 ![Feature Importances Matrix](top_ten_importances_heatmap_desc.jpg)
 
 
-![Feature Importance by Sub-Family]('feature_rank_swarmplot.jpg')
 
 
+![Feature Importance by Sub-Family](feature_rank_swarmplot.jpg)
+
+Back-projected coefficients are directional and basis-dependent. They describe which linear combinations of features the model leans on in SVD space. In a multicollinear, compositional dataset, many original variables share the same latent directions, so slope gets spread out across them.
+
+Permutation importance is performance-based and non-directional. It collapses groups of correlated features: if several features all live in the same subspace, shuffling one of them may barely hurt performance because the others still carry the signal. After allocation via squared loadings, that produces a much different ranking than BPβ.
+
+
+Linear importances only
+![Linear Signal
 
 
  
