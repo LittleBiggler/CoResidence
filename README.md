@@ -55,6 +55,9 @@ Feature importances conducted in a number of different ways. Linear models used 
 ![Feature Importances Matrix](top_ten_importances_heatmap_desc.jpg)
 
 
+![Feature Importance by Sub-Family]('feature_rank_swarmplot.jpg')
+
+
 
 
  
