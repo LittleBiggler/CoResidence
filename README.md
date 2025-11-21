@@ -79,6 +79,14 @@ When coefficients are projected back onto the original features, the purity of t
 
 Permutation importances tell us which of the purified features are indispensable for prediction, once redundancy is taken into account. Thus, PI doesn't just tell us which features align with a certain vector direction in a subspace, they tell us which subspaces are the most indispensible to model performance.
 
+# Back-Projected Beta vs. Permutation Importances
+SVD removes redundancy in the feature representation,
+but it does not remove redundancy in the predictive relationship to the target.
+
+Back-projected coefficients measure the model’s directional use of components.
+Permutation importance measures the model’s dependence on them for accuracy.
+Those are fundamentally different concepts, so they need not agree.
+
 # How to Run:
 Conda python env
 Don't run the final section "Addendum," because it takes forever, and it's just for fun.
