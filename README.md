@@ -79,9 +79,9 @@ When coefficients are projected back onto the original features, the purity of t
 
 Permutation importances tell us which of the purified features are indispensable for prediction, once redundancy is taken into account. Thus, PI doesn't just tell us which features align with a certain vector direction in a subspace, they tell us which subspaces are the most indispensible to model performance.
 
-
-Linear importances only
-![Linear Signal
+# How to Run:
+Conda python env
+Don't run the final section "Addendum," because it takes forever, and it's just for fun.
 
 
  
