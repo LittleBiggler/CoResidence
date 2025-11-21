@@ -73,9 +73,11 @@ The non-linear models did overlap with the linear models on a number of features
 
 ![Feature Importance by Sub-Family](feature_rank_swarmplot.jpg)
 
-Back-projected coefficients are directional and basis-dependent. They describe which linear combinations of features the model leans on in SVD space. In a multicollinear, compositional dataset, many original variables share the same latent directions, so slope gets spread out across them.
+SVD at its core collapses redundant information into clear signal. In a multicollinear, compositional dataset, many original variables share the same latent directions. Sharing latent directions is redundancy. The SVD feature space is a distillation of the original feature space. 
 
-Permutation importance is performance-based and non-directional. It collapses groups of correlated features: if several features all live in the same subspace, shuffling one of them may barely hurt performance because the others still carry the signal. After allocation via squared loadings, that produces a much different ranking than BPβ.
+When coefficients are projected back onto the original features, the purity of the signal gets diffused back to redundant bases.
+
+Permutation importances tell us which of the purified features are indispensable for prediction, once redundancy is taken into account. Thus, PI doesn't just tell us which features align with a certain vector direction in a subspace, they tell us which subspaces are the most indispensible to model performance.
 
 
 Linear importances only
