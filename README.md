@@ -86,9 +86,6 @@ My analysis looks at feature importances in a number of different ways. Here, I 
 Permutation importances tell us which of the purified features are indispensable for prediction, once redundancy is taken into account. Thus, PI doesn't just tell us which features align with a certain vector direction in a subspace, they tell us which subspaces are the most indispensible to model performance.
 
 
-
-Linear-Only Heatmap:
-
 ![Feature Importances Matrix](top_ten_importances_heatmap_desc.jpg)
 
 
