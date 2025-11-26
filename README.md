@@ -42,28 +42,42 @@ Feature importances for linear models were interpreted through back-projected co
 ## Model Comparison
 ![Model Comparison](final_score_matrix.jpg)
 
-As you can see, the baseline model (.dropna()) produced some of the best results, in terms of explanatory power (R2). This is likely due to the fact that countries with poor data quality were mostly dropped, by definition. Higher R2 values of the baseline model hid an underlying problem: Unstable matrix. Unstable matrices produce unreliable model results. Tiny changes to any value in an unstable matrix can cause your model to whip around wildly. Thus, dimensionality reduction was needed.
+As you can see, the baseline model (.dropna()) produced some of the best results, in terms of explanatory power (R2). This is likely due to the fact that countries with poor data quality were mostly dropped, by definition. Higher R2 values of the baseline model hid an underlying problem: Unstable matrix. Unstable matrices produce unreliable model results. Tiny changes to any value in an unstable matrix can cause your model to whip around wildly. Dimensionality reduction and imputation was needed to stabilize the matrix.
 
 
 
 ## Conclusion
 
-Models produced encouraging results, in terms of showing the importance of household configuration to outcomes of wealth inequality. My fear when starting this project was that population and demographics features would dominate results, essentially showing that household configuration was an irrelevant. While GDP was the number one feature for linear signal, that was the only such feature.
+A complex dataset requires a complex conclusion. In the interest of simplicity, I distill the following insights. If you want to anticipate the future of wealth inequality in a given nation, you must consider the following two insights:
+1) GDP is important to wealth inequality in a linear way
+2) Pay attention the the number of children, spouses, and non-relatives in medium sized households
+
+Models produced encouraging results, in terms of showing the importance of household configuration features, to outcomes of wealth inequality. One fear when starting this project was that population and demographics features would dominate results, essentially showing that household configuration was irrelevant. While GDP was the number one feature for linear signal, that was the only such feature. All other top features pertained to household configuration. 
 
 Linear and Non-Linear Overlap:
-1) Non-relatives in 3-5 person households
-2) Non-relatives in male-headed households
-3) Proportion of 4-5 person households
+- Non-relatives in 3-5 person households
+- Non-relatives in male-headed households
+- Proportion of 4-5 person households
 
 Linear Only:
-1) GDP (number one for all three models)
-2) The number of children, or the number of non-relatives, in small and medium sized households (2-5 persons)
-3) The proportion of large (9-person) female-headed households
+- GDP (number one for all three models)
+- The number of children, or the number of non-relatives, in small and medium sized households (2-5 persons)
+- The proportion of large (9-person) female-headed households
 
-Non-Linear Only
-SVR lacked broad overlap with KNN and RF. 
-1) SVR: Household size, number of children in the household, and the fact that those children belonged to the head
-2) KNN and RF: The number of non-relatives, and the number of spouses, in small and medium sized households 
+Non-Linear Only:
+SVR lacked any direct overlap with KNN and RF. 
+
+
+**SVR**: 
+- Household size,
+- Number of children in the household
+- Fact that those children belonged to the head
+
+
+**KNN and RF:**
+- The number of non-relatives
+- The number of spouses, in small and medium sized households
+- Proportion of male-headed households
 
 
 Note:
