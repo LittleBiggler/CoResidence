@@ -1,18 +1,16 @@
 # CoResidence
-## Learning Goals:
+## Project Description:
 
-
-This project uses the “CoResidence” dataset, a recent study of household composition, combined with World Bank and United Nations demographic data, to study how household structure relates to economic well-being across countries and time. The methodological aim in this projet is to explore how to responsibly reconstruct missing values, model latent structure, and evaluate predictive signal in a high-dimensional multi-panel dataset with substantial missingness.
+This project uses the “CoResidence” dataset, a recent study of household composition, combined with World Bank and United Nations demographic data, to study how household structure relates to economic well-being across countries and time. 
 
 CoResidence is my capstone project as an autodidact in data science. My goal was to take a real-world, high-dimensional dataset—preferably complex panel data spanning decades—and treat it as if I had been assigned a forecasting task under realistic constraints.
 
 In other words:
 
 1) Assume the future must be predicted.
-2) Assume the dataset must be used as-is.
-3) Assume missing values must be filled, not dropped.
+2) Assume missing values must be filled, not dropped.
 
-In the formal data science courses that I took, .dropna() was almost always the first preprocessing step. And I almost always quietly wondered: What if that weren’t an option? What if we actually had to use the data we were given?
+In the formal data science courses that I took, .dropna() was almost always the first preprocessing step. And I almost always wondered: What if that weren’t an option? What if we actually had to use the data we were given?
 
 This question is central in many real applications:
 
@@ -22,7 +20,7 @@ This question is central in many real applications:
 
 This is my first attempt to “walk down every path” inside a real-world data labyrinth. The forecasting portion of the project is not yet complete, but the data is now ready for it. Top features are robustly identified, forming the foundation for a future forecasting pipeline.
 
-**Project Description**
+**Workflow Highlights**
 
 This analysis examines how household composition relates to national prosperity (Gini Index) across countries and time. The workflow emphasizes:
 
@@ -50,42 +48,41 @@ As you can see, the baseline model (.dropna()) produced some of the best results
 
 ## Conclusion
 
+Models produced encouraging results, in terms of showing the importance of household configuration to outcomes of wealth inequality. My fear when starting this project was that population and demographics features would dominate results, essentially showing that household configuration was an irrelevant. While GDP was the number one feature for linear signal, that was the only such feature.
+
+Linear and Non-Linear Overlap:
+1) Non-relatives in 3-5 person households
+2) Non-relatives in male-headed households
+3) Proportion of 4-5 person households
+
+Linear Only:
+1) GDP (number one for all three models)
+2) The number of children, or the number of non-relatives, in small and medium sized households (2-5 persons)
+3) The proportion of large (9-person) female-headed households
+
+Non-Linear Only
+SVR lacked broad overlap with KNN and RF. 
+1) SVR: Household size, number of children in the household, and the fact that those children belonged to the head
+2) KNN and RF: The number of non-relatives, and the number of spouses, in small and medium sized households 
+
+
+Note:
 My analysis looks at feature importances in a number of different ways. Here, I only report permutation importances, and not linear coefficients or Random Forest splitting criteria. Permutation importance measures predictive dependence. 
 
+Permutation importances tell us which of the purified features are indispensable for prediction, once redundancy is taken into account. Thus, PI doesn't just tell us which features align with a certain vector direction in a subspace, they tell us which subspaces are the most indispensible to model performance.
 
 
-Hence why I report importances in PI:
 
-For the linear models, the top ten features can be summarized as four main insights. These are the features that really matter:
-1) GDP
-2) The number of children in small and medium-sized households
-3) The number of non-relatives in small and medium sized households
-4) The proportion of large (9-person) female-headed households
-
-The narrative that links these four features together is murky, but plausible. In stable countries, medium households predominate. However, if those medium households are not families, but rather adult roommate situations, that does not bode well for wealth equality.
-
-The non-linear models did overlap with the linear models on a number of features, but identified important signals of their own:
+Linear-Only Heatmap:
 
 ![Feature Importances Matrix](top_ten_importances_heatmap_desc.jpg)
 
 
-
+**Principal Componenent Composition**
 
 ![Feature Importance by Sub-Family](feature_rank_swarmplot.jpg)
 
-SVD at its core collapses redundant information into clear signal. In a multicollinear, compositional dataset, many original variables share the same latent directions. Sharing latent directions is redundancy. The SVD feature space is a distillation of the original feature space. 
 
-When coefficients are projected back onto the original features, the purity of the signal gets diffused back to redundant bases.
-
-Permutation importances tell us which of the purified features are indispensable for prediction, once redundancy is taken into account. Thus, PI doesn't just tell us which features align with a certain vector direction in a subspace, they tell us which subspaces are the most indispensible to model performance.
-
-# Back-Projected Beta vs. Permutation Importances
-SVD removes redundancy in the feature representation,
-but it does not remove redundancy in the predictive relationship to the target.
-
-Back-projected coefficients measure the model’s directional use of components.
-Permutation importance measures the model’s dependence on them for accuracy.
-Those are fundamentally different concepts, so they need not agree.
 
 # How to Run:
 Conda python env
