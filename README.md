@@ -42,11 +42,9 @@ All models, regardless of linearity, were compared using allocated load on permu
 ## Model Comparison
 ![Model Comparison](final_score_matrix.jpg)
 
-I used XGBoost as a baseline model, because XGBoost allows for NaN values and handles sparse matrices. This allowed me to provide a comparison to imputed values without being forced into row-deletion, in order to meet the requirements of a model that cannot digest null values. Matrix stability cannot be assessed where null values exist, because an eigenvalue-style decompsition cannot be performed, and thus the calculations for matrix condition cannot be performed.
+I used XGBoost as a baseline model, because XGBoost allows for NaN values and handles sparse matrices. This allowed me to provide a comparison to imputed values without being forced into row-deletion, in order to meet the requirements of a model that cannot digest null values. Matrix stability cannot be assessed where null values exist, because an eigenvalue-style decompsition cannot be performed, and thus the calculations for matrix condition cannot be performed. 
 
-
-
-
+While the IterativeImputer dataset appears to have the best scores, the red vs. green fields indicate matrix stability. Iterative Imputer produced unstable matrices, which in turn produce unreliable model results.
 
 ## Conclusion
 
