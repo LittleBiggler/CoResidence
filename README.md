@@ -42,7 +42,9 @@ All models, regardless of linearity, were compared using allocated load on permu
 ## Model Comparison
 ![Model Comparison](final_score_matrix.jpg)
 
-As you can see, the baseline model (.dropna()) produced some of the best results, in terms of explanatory power (R2). This is likely due to the fact that countries with poor data quality were mostly dropped, by definition. Higher R2 values of the baseline model hid an underlying problem: Unstable matrix (hence the red background). Unstable matrices produce unreliable model results. Tiny changes to any value in an unstable matrix can cause your model to whip around wildly. Component analysis was needed to stabilize the matrix.
+I used XGBoost as a baseline model, because XGBoost allows for NaN values and handles sparse matrices. This allowed me to provide a comparison to imputed values without being forced into row-deletion, in order to meet the requirements of a model that cannot digest null values. Matrix stability cannot be assessed where null values exist, because an eigenvalue-style decompsition cannot be performed, and thus the calculations for matrix condition cannot be performed.
+
+
 
 
 
