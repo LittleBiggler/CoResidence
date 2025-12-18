@@ -74,7 +74,7 @@ SVR:
 - Fact that those children belonged to the head
 
 
-KNN and RF:
+KNN, RF, XGBoost:
 - The number of non-relatives
 - The number of spouses, in small and medium sized households
 - Proportion of male-headed households
@@ -99,5 +99,6 @@ Don't run the final section "Addendum," because it takes forever, and it's just 
 
 
  
+
 
 
