@@ -20,4 +20,9 @@ This question is central in many real applications:
 2) Customer and business analytics, where CRM fields, transaction logs, or historical data are often missing or inconsistently collected
 3) Operational forecasting, where you cannot discard imperfect inputs simply because they contain gaps
 
+Next Steps:
+Based on feedback from Professor Hahn (ASU), 
+1) I should work to improve my KNN neighbors groupings in the target imputation section.
+2) Iterative Imputer with Bayesian Ridge estimator could similarly benefit from cohort-groupings, which would better match the probabilistic profile of values being imputed. This could yield competitive imputation, without all of the interpretability loss that comes with SVD.
+
 
